@@ -48,10 +48,17 @@ public class AlunoDAO {
     }
 
     public void salvarDados() {
-        try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
-            output.writeObject(alunos);
+        // try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
+        //     output.writeObject(alunos);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+        for (Aluno aluno : alunos) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.file, true))) {
+            writer.write(aluno.getCurso() + " " + aluno.getMatricula() + " " + aluno.getNome() + "\n");
         } catch (IOException e) {
             e.printStackTrace();
+        }
         }
     }
 
